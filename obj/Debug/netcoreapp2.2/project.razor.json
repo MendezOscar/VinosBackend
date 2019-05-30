@@ -2757,5 +2757,31 @@
     "CSharpLanguageVersion": 703
   },
   "RootNamespace": "VinosBackend",
-  "Documents": []
+  "Documents": [
+    {
+      "FilePath": "Views/Empleado/Create.cshtml",
+      "TargetPath": "Views/Empleado/Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Empleado/Details.cshtml",
+      "TargetPath": "Views/Empleado/Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Empleado/Index.cshtml",
+      "TargetPath": "Views/Empleado/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Empleado/Edit.cshtml",
+      "TargetPath": "Views/Empleado/Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Empleado/Delete.cshtml",
+      "TargetPath": "Views/Empleado/Delete.cshtml",
+      "FileKind": "mvc"
+    }
+  ]
 }

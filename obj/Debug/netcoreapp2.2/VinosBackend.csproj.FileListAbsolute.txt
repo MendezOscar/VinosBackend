@@ -1,0 +1,14 @@
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/bin/Debug/netcoreapp2.2/VinosBackend.deps.json
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/bin/Debug/netcoreapp2.2/VinosBackend.runtimeconfig.json
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/bin/Debug/netcoreapp2.2/VinosBackend.runtimeconfig.dev.json
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/bin/Debug/netcoreapp2.2/VinosBackend.dll
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/bin/Debug/netcoreapp2.2/VinosBackend.pdb
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.csprojAssemblyReference.cache
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.csproj.CoreCompileInputs.cache
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.RazorAssemblyInfo.cache
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.RazorAssemblyInfo.cs
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.AssemblyInfoInputs.cache
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.AssemblyInfo.cs
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.RazorTargetAssemblyInfo.cache
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.dll
+/Users/oscarmendez/Documents/Code/c#/VinosBackend/obj/Debug/netcoreapp2.2/VinosBackend.pdb
