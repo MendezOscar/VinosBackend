@@ -7,6 +7,7 @@ namespace VinosBackend.Models
     {
         public Proveedor()
         {
+            Proveedorvisita = new HashSet<Proveedorvisita>();
             Visita = new HashSet<Visita>();
         }
 
@@ -14,6 +15,7 @@ namespace VinosBackend.Models
         public string Nombre { get; set; }
         public string Contacto { get; set; }
 
+        public virtual ICollection<Proveedorvisita> Proveedorvisita { get; set; }
         public virtual ICollection<Visita> Visita { get; set; }
     }
 }

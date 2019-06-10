@@ -24,8 +24,11 @@ namespace VinosBackend.Models
         public virtual DbSet<Ordendeproducciondtl> Ordendeproducciondtl { get; set; }
         public virtual DbSet<Ordendeproduccionhdr> Ordendeproduccionhdr { get; set; }
         public virtual DbSet<Personalorden> Personalorden { get; set; }
+        public virtual DbSet<Personalvisita> Personalvisita { get; set; }
+        public virtual DbSet<Planactividades> Planactividades { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Proveedorvisita> Proveedorvisita { get; set; }
         public virtual DbSet<Recetadtl> Recetadtl { get; set; }
         public virtual DbSet<Recetahdr> Recetahdr { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -262,6 +265,44 @@ namespace VinosBackend.Models
                     .HasConstraintName("fk_product");
             });
 
+            modelBuilder.Entity<Personalvisita>(entity =>
+            {
+                entity.HasKey(e => e.Idpersonalvisita)
+                    .HasName("personalvisita_pkey");
+
+                entity.ToTable("personalvisita");
+
+                entity.Property(e => e.Idpersonalvisita)
+                    .HasColumnName("idpersonalvisita")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Idempleado).HasColumnName("idempleado");
+
+                entity.HasOne(d => d.IdempleadoNavigation)
+                    .WithMany(p => p.Personalvisita)
+                    .HasForeignKey(d => d.Idempleado)
+                    .HasConstraintName("fk_personal");
+            });
+
+            modelBuilder.Entity<Planactividades>(entity =>
+            {
+                entity.HasKey(e => e.Idplanactividades)
+                    .HasName("planactividades_pkey");
+
+                entity.ToTable("planactividades");
+
+                entity.Property(e => e.Idplanactividades)
+                    .HasColumnName("idplanactividades")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Idactividad).HasColumnName("idactividad");
+
+                entity.HasOne(d => d.IdactividadNavigation)
+                    .WithMany(p => p.Planactividades)
+                    .HasForeignKey(d => d.Idactividad)
+                    .HasConstraintName("fk_actividad");
+            });
+
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.Idproducto)
@@ -296,6 +337,25 @@ namespace VinosBackend.Models
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Proveedorvisita>(entity =>
+            {
+                entity.HasKey(e => e.Idproveedorvisita)
+                    .HasName("proveedorvisita_pkey");
+
+                entity.ToTable("proveedorvisita");
+
+                entity.Property(e => e.Idproveedorvisita)
+                    .HasColumnName("idproveedorvisita")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Idproveedor).HasColumnName("idproveedor");
+
+                entity.HasOne(d => d.IdproveedorNavigation)
+                    .WithMany(p => p.Proveedorvisita)
+                    .HasForeignKey(d => d.Idproveedor)
+                    .HasConstraintName("fk_proveedor");
             });
 
             modelBuilder.Entity<Recetadtl>(entity =>

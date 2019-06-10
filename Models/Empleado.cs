@@ -8,6 +8,7 @@ namespace VinosBackend.Models
         public Empleado()
         {
             Personalorden = new HashSet<Personalorden>();
+            Personalvisita = new HashSet<Personalvisita>();
         }
 
         public int Idempleado { get; set; }
@@ -18,5 +19,6 @@ namespace VinosBackend.Models
         public string Cargo { get; set; }
 
         public virtual ICollection<Personalorden> Personalorden { get; set; }
+        public virtual ICollection<Personalvisita> Personalvisita { get; set; }
     }
 }

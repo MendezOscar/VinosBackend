@@ -11,23 +11,23 @@ namespace VinosBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonalodenController : ControllerBase
+    public class PersonalordenController : ControllerBase
     {
         private readonly VinosDBContext _context;
 
-        public PersonalodenController(VinosDBContext context)
+        public PersonalordenController(VinosDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Personaloden
+        // GET: api/Personalorden
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Personalorden>>> GetPersonalorden()
         {
             return await _context.Personalorden.ToListAsync();
         }
 
-        // GET: api/Personaloden/5
+        // GET: api/Personalorden/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Personalorden>> GetPersonalorden(int id)
         {
@@ -41,7 +41,7 @@ namespace VinosBackend.Controllers
             return personalorden;
         }
 
-        // PUT: api/Personaloden/5
+        // PUT: api/Personalorden/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPersonalorden(int id, Personalorden personalorden)
         {
@@ -71,7 +71,7 @@ namespace VinosBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Personaloden
+        // POST: api/Personalorden
         [HttpPost]
         public async Task<ActionResult<Personalorden>> PostPersonalorden(Personalorden personalorden)
         {
@@ -95,7 +95,7 @@ namespace VinosBackend.Controllers
             return CreatedAtAction("GetPersonalorden", new { id = personalorden.Idpersonal }, personalorden);
         }
 
-        // DELETE: api/Personaloden/5
+        // DELETE: api/Personalorden/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Personalorden>> DeletePersonalorden(int id)
         {

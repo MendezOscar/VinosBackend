@@ -7,6 +7,7 @@ namespace VinosBackend.Models
     {
         public Actividades()
         {
+            Planactividades = new HashSet<Planactividades>();
             Visita = new HashSet<Visita>();
         }
 
@@ -14,6 +15,7 @@ namespace VinosBackend.Models
         public string Descripcion { get; set; }
         public int? Numerodevisita { get; set; }
 
+        public virtual ICollection<Planactividades> Planactividades { get; set; }
         public virtual ICollection<Visita> Visita { get; set; }
     }
 }

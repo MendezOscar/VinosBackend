@@ -12,6 +12,7 @@ namespace VinosBackend.Models
         public int? Idactividad { get; set; }
         public int? Idproveedor { get; set; }
         public int? Idfinca { get; set; }
+        public string Titulo { get; set; }
 
         public virtual Actividades IdactividadNavigation { get; set; }
         public virtual Finca IdfincaNavigation { get; set; }
