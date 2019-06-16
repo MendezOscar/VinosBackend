@@ -8,6 +8,7 @@ namespace VinosBackend.Models
         public Producto()
         {
             Finca = new HashSet<Finca>();
+            Receta = new HashSet<Receta>();
             Recetahdr = new HashSet<Recetahdr>();
         }
 
@@ -15,6 +16,7 @@ namespace VinosBackend.Models
         public string Nombre { get; set; }
 
         public virtual ICollection<Finca> Finca { get; set; }
+        public virtual ICollection<Receta> Receta { get; set; }
         public virtual ICollection<Recetahdr> Recetahdr { get; set; }
     }
 }

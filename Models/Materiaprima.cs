@@ -7,13 +7,13 @@ namespace VinosBackend.Models
     {
         public Materiaprima()
         {
-            Recetadtl = new HashSet<Recetadtl>();
+            Recetadetalle = new HashSet<Recetadetalle>();
         }
 
         public int Idmateriaprima { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
-        public virtual ICollection<Recetadtl> Recetadtl { get; set; }
+        public virtual ICollection<Recetadetalle> Recetadetalle { get; set; }
     }
 }

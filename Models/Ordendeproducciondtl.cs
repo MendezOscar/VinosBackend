@@ -12,6 +12,5 @@ namespace VinosBackend.Models
 
         public virtual Ordendeproduccionhdr IdordenNavigation { get; set; }
         public virtual Personalorden IdpersonalNavigation { get; set; }
-        public virtual Recetahdr IdrecetaNavigation { get; set; }
     }
 }

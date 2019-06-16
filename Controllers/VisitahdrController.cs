@@ -11,46 +11,46 @@ namespace VinosBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VisitaController : ControllerBase
+    public class VisitahdrController : ControllerBase
     {
         private readonly VinosDBContext _context;
 
-        public VisitaController(VinosDBContext context)
+        public VisitahdrController(VinosDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Visita
+        // GET: api/Visitahdr
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Visita>>> GetVisita()
+        public async Task<ActionResult<IEnumerable<Visitahdr>>> GetVisitahdr()
         {
-            return await _context.Visita.ToListAsync();
+            return await _context.Visitahdr.ToListAsync();
         }
 
-        // GET: api/Visita/5
+        // GET: api/Visitahdr/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Visita>> GetVisita(int id)
+        public async Task<ActionResult<Visitahdr>> GetVisitahdr(int id)
         {
-            var visita = await _context.Visita.FindAsync(id);
+            var visitahdr = await _context.Visitahdr.FindAsync(id);
 
-            if (visita == null)
+            if (visitahdr == null)
             {
                 return NotFound();
             }
 
-            return visita;
+            return visitahdr;
         }
 
-        // PUT: api/Visita/5
+        // PUT: api/Visitahdr/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVisita(int id, Visita visita)
+        public async Task<IActionResult> PutVisitahdr(int id, Visitahdr visitahdr)
         {
-            if (id != visita.Idvisita)
+            if (id != visitahdr.Idvisita)
             {
                 return BadRequest();
             }
 
-            _context.Entry(visita).State = EntityState.Modified;
+            _context.Entry(visitahdr).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace VinosBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VisitaExists(id))
+                if (!VisitahdrExists(id))
                 {
                     return NotFound();
                 }
@@ -71,18 +71,18 @@ namespace VinosBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Visita
+        // POST: api/Visitahdr
         [HttpPost]
-        public async Task<ActionResult<Visita>> PostVisita(Visita visita)
+        public async Task<ActionResult<Visitahdr>> PostVisitahdr(Visitahdr visitahdr)
         {
-            _context.Visita.Add(visita);
+            _context.Visitahdr.Add(visitahdr);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (VisitaExists(visita.Idvisita))
+                if (VisitahdrExists(visitahdr.Idvisita))
                 {
                     return Conflict();
                 }
@@ -92,28 +92,28 @@ namespace VinosBackend.Controllers
                 }
             }
 
-            return CreatedAtAction("GetVisita", new { id = visita.Idvisita }, visita);
+            return CreatedAtAction("GetVisitahdr", new { id = visitahdr.Idvisita }, visitahdr);
         }
 
-        // DELETE: api/Visita/5
+        // DELETE: api/Visitahdr/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Visita>> DeleteVisita(int id)
+        public async Task<ActionResult<Visitahdr>> DeleteVisitahdr(int id)
         {
-            var visita = await _context.Visita.FindAsync(id);
-            if (visita == null)
+            var visitahdr = await _context.Visitahdr.FindAsync(id);
+            if (visitahdr == null)
             {
                 return NotFound();
             }
 
-            _context.Visita.Remove(visita);
+            _context.Visitahdr.Remove(visitahdr);
             await _context.SaveChangesAsync();
 
-            return visita;
+            return visitahdr;
         }
 
-        private bool VisitaExists(int id)
+        private bool VisitahdrExists(int id)
         {
-            return _context.Visita.Any(e => e.Idvisita == id);
+            return _context.Visitahdr.Any(e => e.Idvisita == id);
         }
     }
 }

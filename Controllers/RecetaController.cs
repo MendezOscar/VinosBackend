@@ -11,46 +11,46 @@ namespace VinosBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MateriaprimaController : ControllerBase
+    public class RecetaController : ControllerBase
     {
         private readonly VinosDBContext _context;
 
-        public MateriaprimaController(VinosDBContext context)
+        public RecetaController(VinosDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Materiaprima
+        // GET: api/Receta
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Materiaprima>>> GetMateriaprima()
+        public async Task<ActionResult<IEnumerable<Receta>>> GetReceta()
         {
-            return await _context.Materiaprima.ToListAsync();
+            return await _context.Receta.ToListAsync();
         }
 
-        // GET: api/Materiaprima/5
+        // GET: api/Receta/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Materiaprima>> GetMateriaprima(int id)
+        public async Task<ActionResult<Receta>> GetReceta(int id)
         {
-            var materiaprima = await _context.Materiaprima.FindAsync(id);
+            var receta = await _context.Receta.FindAsync(id);
 
-            if (materiaprima == null)
+            if (receta == null)
             {
                 return NotFound();
             }
 
-            return materiaprima;
+            return receta;
         }
 
-        // PUT: api/Materiaprima/5
+        // PUT: api/Receta/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMateriaprima(int id, Materiaprima materiaprima)
+        public async Task<IActionResult> PutReceta(int id, Receta receta)
         {
-            if (id != materiaprima.Idmateriaprima)
+            if (id != receta.Idreceta)
             {
                 return BadRequest();
             }
 
-            _context.Entry(materiaprima).State = EntityState.Modified;
+            _context.Entry(receta).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace VinosBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MateriaprimaExists(id))
+                if (!RecetaExists(id))
                 {
                     return NotFound();
                 }
@@ -71,18 +71,18 @@ namespace VinosBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Materiaprima
+        // POST: api/Receta
         [HttpPost]
-        public async Task<ActionResult<Materiaprima>> PostMateriaprima(Materiaprima materiaprima)
+        public async Task<ActionResult<Receta>> PostReceta(Receta receta)
         {
-            _context.Materiaprima.Add(materiaprima);
+            _context.Receta.Add(receta);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (MateriaprimaExists(materiaprima.Idmateriaprima))
+                if (RecetaExists(receta.Idreceta))
                 {
                     return Conflict();
                 }
@@ -92,28 +92,28 @@ namespace VinosBackend.Controllers
                 }
             }
 
-            return CreatedAtAction("GetMateriaprima", new { id = materiaprima.Idmateriaprima }, materiaprima);
+            return CreatedAtAction("GetReceta", new { id = receta.Idreceta }, receta);
         }
 
-        // DELETE: api/Materiaprima/5
+        // DELETE: api/Receta/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Materiaprima>> DeleteMateriaprima(int id)
+        public async Task<ActionResult<Receta>> DeleteReceta(int id)
         {
-            var materiaprima = await _context.Materiaprima.FindAsync(id);
-            if (materiaprima == null)
+            var receta = await _context.Receta.FindAsync(id);
+            if (receta == null)
             {
                 return NotFound();
             }
 
-            _context.Materiaprima.Remove(materiaprima);
+            _context.Receta.Remove(receta);
             await _context.SaveChangesAsync();
 
-            return materiaprima;
+            return receta;
         }
 
-        private bool MateriaprimaExists(int id)
+        private bool RecetaExists(int id)
         {
-            return _context.Materiaprima.Any(e => e.Idmateriaprima == id);
+            return _context.Receta.Any(e => e.Idreceta == id);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace VinosBackend.Models
     {
         public Finca()
         {
-            Visita = new HashSet<Visita>();
+            Visitahdr = new HashSet<Visitahdr>();
         }
 
         public int Idfinca { get; set; }
@@ -18,6 +18,6 @@ namespace VinosBackend.Models
         public int? Idproducto { get; set; }
 
         public virtual Producto IdproductoNavigation { get; set; }
-        public virtual ICollection<Visita> Visita { get; set; }
+        public virtual ICollection<Visitahdr> Visitahdr { get; set; }
     }
 }
