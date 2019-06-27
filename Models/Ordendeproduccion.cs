@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace VinosBackend.Models
 {
-    public partial class Ordendeproduccionhdr
+    public partial class Ordendeproduccion
     {
-        public Ordendeproduccionhdr()
+        public Ordendeproduccion()
         {
-            Ordendeproducciondtl = new HashSet<Ordendeproducciondtl>();
+            Materiaprimaoden = new HashSet<Materiaprimaoden>();
         }
 
         public int Idorden { get; set; }
         public string Descripcion { get; set; }
         public DateTime? Fecha { get; set; }
 
-        public virtual ICollection<Ordendeproducciondtl> Ordendeproducciondtl { get; set; }
+        public virtual ICollection<Materiaprimaoden> Materiaprimaoden { get; set; }
     }
 }

@@ -11,46 +11,46 @@ namespace VinosBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VisitahdrController : ControllerBase
+    public class KardexController : ControllerBase
     {
         private readonly VinosDBContext _context;
 
-        public VisitahdrController(VinosDBContext context)
+        public KardexController(VinosDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Visitahdr
+        // GET: api/Kardex
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Visitahdr>>> GetVisitahdr()
+        public async Task<ActionResult<IEnumerable<Kardex>>> GetKardex()
         {
-            return await _context.Visitahdr.ToListAsync();
+            return await _context.Kardex.ToListAsync();
         }
 
-        // GET: api/Visitahdr/5
+        // GET: api/Kardex/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Visitahdr>> GetVisitahdr(int id)
+        public async Task<ActionResult<Kardex>> GetKardex(int id)
         {
-            var visitahdr = await _context.Visitahdr.FindAsync(id);
+            var kardex = await _context.Kardex.FindAsync(id);
 
-            if (visitahdr == null)
+            if (kardex == null)
             {
                 return NotFound();
             }
 
-            return visitahdr;
+            return kardex;
         }
 
-        // PUT: api/Visitahdr/5
+        // PUT: api/Kardex/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVisitahdr(int id, Visitahdr visitahdr)
+        public async Task<IActionResult> PutKardex(int id, Kardex kardex)
         {
-            if (id != visitahdr.Idvisita)
+            if (id != kardex.Idkardex)
             {
                 return BadRequest();
             }
 
-            _context.Entry(visitahdr).State = EntityState.Modified;
+            _context.Entry(kardex).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace VinosBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VisitahdrExists(id))
+                if (!KardexExists(id))
                 {
                     return NotFound();
                 }
@@ -71,18 +71,18 @@ namespace VinosBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Visitahdr
+        // POST: api/Kardex
         [HttpPost]
-        public async Task<ActionResult<Visitahdr>> PostVisitahdr(Visitahdr visitahdr)
+        public async Task<ActionResult<Kardex>> PostKardex(Kardex kardex)
         {
-            _context.Visitahdr.Add(visitahdr);
+            _context.Kardex.Add(kardex);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (VisitahdrExists(visitahdr.Idvisita))
+                if (KardexExists(kardex.Idkardex))
                 {
                     return Conflict();
                 }
@@ -92,28 +92,28 @@ namespace VinosBackend.Controllers
                 }
             }
 
-            return CreatedAtAction("GetVisitahdr", new { id = visitahdr.Idvisita }, visitahdr);
+            return CreatedAtAction("GetKardex", new { id = kardex.Idkardex }, kardex);
         }
 
-        // DELETE: api/Visitahdr/5
+        // DELETE: api/Kardex/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Visitahdr>> DeleteVisitahdr(int id)
+        public async Task<ActionResult<Kardex>> DeleteKardex(int id)
         {
-            var visitahdr = await _context.Visitahdr.FindAsync(id);
-            if (visitahdr == null)
+            var kardex = await _context.Kardex.FindAsync(id);
+            if (kardex == null)
             {
                 return NotFound();
             }
 
-            _context.Visitahdr.Remove(visitahdr);
+            _context.Kardex.Remove(kardex);
             await _context.SaveChangesAsync();
 
-            return visitahdr;
+            return kardex;
         }
 
-        private bool VisitahdrExists(int id)
+        private bool KardexExists(int id)
         {
-            return _context.Visitahdr.Any(e => e.Idvisita == id);
+            return _context.Kardex.Any(e => e.Idkardex == id);
         }
     }
 }

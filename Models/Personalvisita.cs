@@ -7,7 +7,9 @@ namespace VinosBackend.Models
     {
         public int Idpersonalvisita { get; set; }
         public int? Idempleado { get; set; }
+        public int? Idvisita { get; set; }
 
         public virtual Empleado IdempleadoNavigation { get; set; }
+        public virtual Visita IdvisitaNavigation { get; set; }
     }
 }

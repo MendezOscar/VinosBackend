@@ -18,22 +18,18 @@ namespace VinosBackend.Models
         public virtual DbSet<Actividades> Actividades { get; set; }
         public virtual DbSet<Actividadvisita> Actividadvisita { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<Existencias> Existencias { get; set; }
         public virtual DbSet<Finca> Finca { get; set; }
-        public virtual DbSet<Inventariodtl> Inventariodtl { get; set; }
-        public virtual DbSet<Inventariohdr> Inventariohdr { get; set; }
+        public virtual DbSet<Kardex> Kardex { get; set; }
         public virtual DbSet<Materiaprima> Materiaprima { get; set; }
-        public virtual DbSet<Ordendeproducciondtl> Ordendeproducciondtl { get; set; }
-        public virtual DbSet<Ordendeproduccionhdr> Ordendeproduccionhdr { get; set; }
+        public virtual DbSet<Materiaprimaoden> Materiaprimaoden { get; set; }
+        public virtual DbSet<Ordendeproduccion> Ordendeproduccion { get; set; }
         public virtual DbSet<Personalorden> Personalorden { get; set; }
         public virtual DbSet<Personalvisita> Personalvisita { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
-        public virtual DbSet<Proveedorvisita> Proveedorvisita { get; set; }
-        public virtual DbSet<Receta> Receta { get; set; }
-        public virtual DbSet<Recetadetalle> Recetadetalle { get; set; }
-        public virtual DbSet<Recetahdr> Recetahdr { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Visitahdr> Visitahdr { get; set; }
+        public virtual DbSet<Visita> Visita { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -79,9 +75,9 @@ namespace VinosBackend.Models
 
                 entity.Property(e => e.Idactividad).HasColumnName("idactividad");
 
-                entity.HasOne(d => d.IdactividadNavigation)
+                entity.HasOne(d => d.IdvisitaNavigation)
                     .WithMany(p => p.Actividadvisita)
-                    .HasForeignKey(d => d.Idactividad)
+                    .HasForeignKey(d => d.Idvisita)
                     .HasConstraintName("fk_actividadvisita");
             });
 
@@ -113,6 +109,22 @@ namespace VinosBackend.Models
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Existencias>(entity =>
+            {
+                entity.HasKey(e => e.Idexistencia)
+                    .HasName("existencias_pkey");
+
+                entity.ToTable("existencias");
+
+                entity.Property(e => e.Idexistencia)
+                    .HasColumnName("idexistencia")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+                entity.Property(e => e.Item).HasColumnName("item");
             });
 
             modelBuilder.Entity<Finca>(entity =>
@@ -150,47 +162,32 @@ namespace VinosBackend.Models
                     .HasConstraintName("fk_idproducto");
             });
 
-            modelBuilder.Entity<Inventariodtl>(entity =>
+            modelBuilder.Entity<Kardex>(entity =>
             {
-                entity.HasKey(e => e.Idinventariodetalle)
-                    .HasName("inventariodtl_pkey");
+                entity.HasKey(e => e.Idkardex)
+                    .HasName("kardex_pkey");
 
-                entity.ToTable("inventariodtl");
+                entity.ToTable("kardex");
 
-                entity.Property(e => e.Idinventariodetalle)
-                    .HasColumnName("idinventariodetalle")
+                entity.Property(e => e.Idkardex)
+                    .HasColumnName("idkardex")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Existencia).HasColumnName("existencia");
-
-                entity.Property(e => e.Idinventario).HasColumnName("idinventario");
-
-                entity.Property(e => e.Item)
-                    .HasColumnName("item")
-                    .HasMaxLength(100);
-
-                entity.HasOne(d => d.IdinventarioNavigation)
-                    .WithMany(p => p.Inventariodtl)
-                    .HasForeignKey(d => d.Idinventario)
-                    .HasConstraintName("fk_inventario");
-            });
-
-            modelBuilder.Entity<Inventariohdr>(entity =>
-            {
-                entity.HasKey(e => e.Idinventario)
-                    .HasName("inventariohdr_pkey");
-
-                entity.ToTable("inventariohdr");
-
-                entity.Property(e => e.Idinventario)
-                    .HasColumnName("idinventario")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
 
                 entity.Property(e => e.Fecha)
                     .HasColumnName("fecha")
                     .HasColumnType("date");
 
-                entity.Property(e => e.Tipo).HasColumnName("tipo");
+                entity.Property(e => e.Item).HasColumnName("item");
+
+                entity.Property(e => e.Motivo)
+                    .HasColumnName("motivo")
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.Transaccion)
+                    .HasColumnName("transaccion")
+                    .HasColumnType("char");
             });
 
             modelBuilder.Entity<Materiaprima>(entity =>
@@ -208,45 +205,45 @@ namespace VinosBackend.Models
                     .HasColumnName("descripcion")
                     .HasMaxLength(1000);
 
+                entity.Property(e => e.Idproveedor).HasColumnName("idproveedor");
+
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
                     .HasMaxLength(100);
+
+                entity.HasOne(d => d.IdproveedorNavigation)
+                    .WithMany(p => p.Materiaprima)
+                    .HasForeignKey(d => d.Idproveedor)
+                    .HasConstraintName("fk_idproveedor");
             });
 
-            modelBuilder.Entity<Ordendeproducciondtl>(entity =>
+            modelBuilder.Entity<Materiaprimaoden>(entity =>
             {
-                entity.HasKey(e => e.Idordendetalle)
-                    .HasName("ordendeproducciondtl_pkey");
+                entity.HasKey(e => e.Idmateriaprimaorden)
+                    .HasName("idmateriaprimaorden");
 
-                entity.ToTable("ordendeproducciondtl");
+                entity.ToTable("materiaprimaoden");
 
-                entity.Property(e => e.Idordendetalle)
-                    .HasColumnName("idordendetalle")
+                entity.Property(e => e.Idmateriaprimaorden)
+                    .HasColumnName("idmateriaprimaorden")
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.Idmateriaprima).HasColumnName("idmateriaprima");
 
                 entity.Property(e => e.Idorden).HasColumnName("idorden");
 
-                entity.Property(e => e.Idpersonal).HasColumnName("idpersonal");
-
-                entity.Property(e => e.Idreceta).HasColumnName("idreceta");
-
                 entity.HasOne(d => d.IdordenNavigation)
-                    .WithMany(p => p.Ordendeproducciondtl)
+                    .WithMany(p => p.Materiaprimaoden)
                     .HasForeignKey(d => d.Idorden)
-                    .HasConstraintName("fk_ordendeproducciondtl");
-
-                entity.HasOne(d => d.IdpersonalNavigation)
-                    .WithMany(p => p.Ordendeproducciondtl)
-                    .HasForeignKey(d => d.Idpersonal)
-                    .HasConstraintName("fk_personal");
+                    .HasConstraintName("fk_materiaprimaorden");
             });
 
-            modelBuilder.Entity<Ordendeproduccionhdr>(entity =>
+            modelBuilder.Entity<Ordendeproduccion>(entity =>
             {
                 entity.HasKey(e => e.Idorden)
                     .HasName("ordendeproduccionhdr_pkey");
 
-                entity.ToTable("ordendeproduccionhdr");
+                entity.ToTable("ordendeproduccion");
 
                 entity.Property(e => e.Idorden)
                     .HasColumnName("idorden")
@@ -293,10 +290,17 @@ namespace VinosBackend.Models
 
                 entity.Property(e => e.Idempleado).HasColumnName("idempleado");
 
+                entity.Property(e => e.Idvisita).HasColumnName("idvisita");
+
                 entity.HasOne(d => d.IdempleadoNavigation)
                     .WithMany(p => p.Personalvisita)
                     .HasForeignKey(d => d.Idempleado)
                     .HasConstraintName("fk_personal");
+
+                entity.HasOne(d => d.IdvisitaNavigation)
+                    .WithMany(p => p.Personalvisita)
+                    .HasForeignKey(d => d.Idvisita)
+                    .HasConstraintName("fk_visitapersonal");
             });
 
             modelBuilder.Entity<Producto>(entity =>
@@ -335,101 +339,6 @@ namespace VinosBackend.Models
                     .HasMaxLength(100);
             });
 
-            modelBuilder.Entity<Proveedorvisita>(entity =>
-            {
-                entity.HasKey(e => e.Idproveedorvisita)
-                    .HasName("proveedorvisita_pkey");
-
-                entity.ToTable("proveedorvisita");
-
-                entity.Property(e => e.Idproveedorvisita)
-                    .HasColumnName("idproveedorvisita")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Idproveedor).HasColumnName("idproveedor");
-
-                entity.HasOne(d => d.IdproveedorNavigation)
-                    .WithMany(p => p.Proveedorvisita)
-                    .HasForeignKey(d => d.Idproveedor)
-                    .HasConstraintName("fk_proveedorvisita");
-            });
-
-            modelBuilder.Entity<Receta>(entity =>
-            {
-                entity.HasKey(e => e.Idreceta)
-                    .HasName("receta_pkey");
-
-                entity.ToTable("receta");
-
-                entity.Property(e => e.Idreceta)
-                    .HasColumnName("idreceta")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Duracion).HasColumnName("duracion");
-
-                entity.Property(e => e.Idproducto).HasColumnName("idproducto");
-
-                entity.HasOne(d => d.IdproductoNavigation)
-                    .WithMany(p => p.Receta)
-                    .HasForeignKey(d => d.Idproducto)
-                    .HasConstraintName("fk_recetahdr");
-            });
-
-            modelBuilder.Entity<Recetadetalle>(entity =>
-            {
-                entity.HasKey(e => e.Idrecetadetalle)
-                    .HasName("recetadetalle_pkey");
-
-                entity.ToTable("recetadetalle");
-
-                entity.Property(e => e.Idrecetadetalle)
-                    .HasColumnName("idrecetadetalle")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
-
-                entity.Property(e => e.Idmateriaprima).HasColumnName("idmateriaprima");
-
-                entity.Property(e => e.Idreceta).HasColumnName("idreceta");
-
-                entity.Property(e => e.Medida)
-                    .HasColumnName("medida")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Periodicidad).HasColumnName("periodicidad");
-
-                entity.HasOne(d => d.IdmateriaprimaNavigation)
-                    .WithMany(p => p.Recetadetalle)
-                    .HasForeignKey(d => d.Idmateriaprima)
-                    .HasConstraintName("fk_materiaprima");
-
-                entity.HasOne(d => d.IdrecetaNavigation)
-                    .WithMany(p => p.Recetadetalle)
-                    .HasForeignKey(d => d.Idreceta)
-                    .HasConstraintName("fk_idreceta");
-            });
-
-            modelBuilder.Entity<Recetahdr>(entity =>
-            {
-                entity.HasKey(e => e.Idreceta)
-                    .HasName("recetahdr_pkey");
-
-                entity.ToTable("recetahdr");
-
-                entity.Property(e => e.Idreceta)
-                    .HasColumnName("idreceta")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Duracion).HasColumnName("duracion");
-
-                entity.Property(e => e.Idproducto).HasColumnName("idproducto");
-
-                entity.HasOne(d => d.IdproductoNavigation)
-                    .WithMany(p => p.Recetahdr)
-                    .HasForeignKey(d => d.Idproducto)
-                    .HasConstraintName("fk_recetahdr");
-            });
-
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.Idusuario)
@@ -450,12 +359,12 @@ namespace VinosBackend.Models
                     .HasMaxLength(200);
             });
 
-            modelBuilder.Entity<Visitahdr>(entity =>
+            modelBuilder.Entity<Visita>(entity =>
             {
                 entity.HasKey(e => e.Idvisita)
                     .HasName("visita_pkey");
 
-                entity.ToTable("visitahdr");
+                entity.ToTable("visita");
 
                 entity.Property(e => e.Idvisita)
                     .HasColumnName("idvisita")
@@ -471,12 +380,10 @@ namespace VinosBackend.Models
 
                 entity.Property(e => e.Idfinca).HasColumnName("idfinca");
 
-                entity.Property(e => e.Idproveedor).HasColumnName("idproveedor");
-
                 entity.Property(e => e.Numero).HasColumnName("numero");
 
                 entity.HasOne(d => d.IdfincaNavigation)
-                    .WithMany(p => p.Visitahdr)
+                    .WithMany(p => p.Visita)
                     .HasForeignKey(d => d.Idfinca)
                     .HasConstraintName("fk_finca");
             });
