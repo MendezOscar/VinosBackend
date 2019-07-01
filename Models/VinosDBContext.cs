@@ -187,7 +187,7 @@ namespace VinosBackend.Models
 
                 entity.Property(e => e.Transaccion)
                     .HasColumnName("transaccion")
-                    .HasColumnType("char");
+                    .HasMaxLength(10);
             });
 
             modelBuilder.Entity<Materiaprima>(entity =>
@@ -256,6 +256,8 @@ namespace VinosBackend.Models
                 entity.Property(e => e.Fecha)
                     .HasColumnName("fecha")
                     .HasColumnType("date");
+
+                entity.Property(e => e.Item).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Personalorden>(entity =>

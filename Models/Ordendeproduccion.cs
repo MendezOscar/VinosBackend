@@ -13,6 +13,8 @@ namespace VinosBackend.Models
         public int Idorden { get; set; }
         public string Descripcion { get; set; }
         public DateTime? Fecha { get; set; }
+        public int? Cantidadobtenida { get; set; }
+        public string Item { get; set; }
 
         public virtual ICollection<Materiaprimaoden> Materiaprimaoden { get; set; }
     }
