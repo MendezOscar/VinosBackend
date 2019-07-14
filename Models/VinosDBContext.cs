@@ -253,6 +253,10 @@ namespace VinosBackend.Models
                     .HasColumnName("descripcion")
                     .HasMaxLength(1000);
 
+                entity.Property(e => e.Estado)
+                    .HasColumnName("estado")
+                    .HasMaxLength(30);
+
                 entity.Property(e => e.Fecha)
                     .HasColumnName("fecha")
                     .HasColumnType("date");
